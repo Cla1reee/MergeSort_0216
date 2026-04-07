@@ -39,6 +39,10 @@ void mergeSort(int low, int high) {
 
     mergeSort(low, mid);      // Bagian kiri
     mergeSort(mid + 1, high); // Bagian kanan
+
+    int i = low;     // Indeks awal sub-array kiri
+    int j = mid + 1; // Indeks awal sub-array kanan
+    int k = low;     // Indeks awal untuk array sementara B
 }
 
 int main() {
