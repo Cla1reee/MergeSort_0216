@@ -30,6 +30,12 @@ void output() {
     cout << endl;
 }
 
+void mergeSort(int low, int high) {
+    if (low >= high) {
+        return;
+    }
+}
+
 int main() {
     return 0;
 }
