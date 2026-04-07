@@ -73,5 +73,8 @@ void mergeSort(int low, int high) {
 }
 
 int main() {
+    input();
+    mergeSort(0, n - 1);
+    output();
     return 0;
 }
