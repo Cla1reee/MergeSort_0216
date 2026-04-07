@@ -54,6 +54,18 @@ void mergeSort(int low, int high) {
         }
         k++;
     }
+
+    while (j <= high) { // Sisa di kanan
+        B[k] = arr[j];
+        j++;
+        k++;
+    }
+
+    while (i <= mid) { // Sisa di kiri
+        B[k] = arr[i];
+        i++;
+        k++;
+    }
 }
 
 int main() {
