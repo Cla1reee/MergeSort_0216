@@ -1,15 +1,20 @@
 #include <iostream>
 using namespace std;
 
+// Deklarasi array utama dan array sementara secara global
 int arr[20], B[20];
-int n;
+int n; 
 
 void input() {
     while (true) {
         cout << "Masukkan Panjang element array : ";
         cin >> n;
-        if (n <= 20) break;
-        else cout << "\nMaksimal panjang array adalah 20" << endl;
+
+        if (n > 0 && n <= 20) {
+            break;
+        } else {
+            cout << "\nMaksimal panjang array adalah 20 dan tidak boleh 0!" << endl;
+        }
     }
 
     cout << "\n-------------------" << endl;
@@ -22,6 +27,55 @@ void input() {
     }
 }
 
+void mergeSort(int low, int high) {
+    // Step 1: Base case
+    if (low >= high) {
+        return;
+    }
+
+    // Step 2: Mencari titik tengah
+    int mid = (low + high) / 2;
+
+    // Step 3: Rekursi
+    mergeSort(low, mid);      
+    mergeSort(mid + 1, high); 
+
+    // Step 4: Merging
+    int i = low;      
+    int j = mid + 1;  
+    int k = low;      
+
+    // Perbaiki Step 4.d - Logika perbandingan
+    while (i <= mid && j <= high) { 
+        if (arr[i] <= arr[j]) {     
+            B[k] = arr[i];
+            i++;
+        } else {
+            B[k] = arr[j];
+            j++;
+        }
+        k++; 
+    }
+
+    // Perbaiki Step 4.e & 4.f - Memindahkan sisa elemen
+    while (i <= mid) { 
+        B[k] = arr[i];
+        i++;
+        k++;
+    }
+
+    while (j <= high) { 
+        B[k] = arr[j];
+        j++;
+        k++;
+    }
+
+    // Step 5: Copy data kembali ke array asal
+    for (int x = low; x <= high; x++) {
+        arr[x] = B[x];
+    }
+}
+
 void output() {
     cout << "\nData setelah diurutkan (Merge Sort): ";
     for (int i = 0; i < n; i++) {
@@ -30,51 +84,11 @@ void output() {
     cout << endl;
 }
 
-void mergeSort(int low, int high) {
-    if (low >= high) {
-        return;
-    }
-
-    int mid = (low + high) / 2;
-
-    mergeSort(low, mid);      // Bagian kiri
-    mergeSort(mid + 1, high); // Bagian kanan
-
-    int i = low;     // Indeks awal sub-array kiri
-    int j = mid + 1; // Indeks awal sub-array kanan
-    int k = low;     // Indeks awal untuk array sementara B
-
-    while (i <= mid && j <= high) {
-        if (arr[i] <= arr[j]) {
-            B[k] = arr[i];
-            i++;
-        } else {
-            B[k] = arr[j];
-            j++;
-        }
-        k++;
-    }
-
-    while (j <= high) { // Sisa di kanan
-        B[k] = arr[j];
-        j++;
-        k++;
-    }
-
-    while (i <= mid) { // Sisa di kiri
-        B[k] = arr[i];
-        i++;
-        k++;
-    }
-
-    for (int x = low; x <= high; x++) {
-        arr[x] = B[x];
-    }
-}
-
 int main() {
-    input();
-    mergeSort(0, n - 1);
-    output();
+    input();             
+    if (n > 0) {
+        mergeSort(0, n - 1); 
+        output();            
+    }
     return 0;
 }
