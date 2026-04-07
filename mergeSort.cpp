@@ -34,6 +34,11 @@ void mergeSort(int low, int high) {
     if (low >= high) {
         return;
     }
+
+    int mid = (low + high) / 2;
+
+    mergeSort(low, mid);      // Bagian kiri
+    mergeSort(mid + 1, high); // Bagian kanan
 }
 
 int main() {
